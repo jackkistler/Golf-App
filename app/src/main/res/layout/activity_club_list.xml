@@ -4,19 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".ClubListActivity"
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btnStrokeList"
+        android:id="@+id/btnAddClub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/stroke_data" />
+        android:text="@string/btn_add_club" />
 
-    <Button
-        android:id="@+id/btnClubList"
+    <ListView
+        android:id="@+id/lsClubs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/my_clubs" />
-
+        android:layout_height="match_parent" />
 </LinearLayout>

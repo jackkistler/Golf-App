@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Golf App</string>
+    <string name="stroke_data">Stroke Data</string>
+    <string name="my_clubs">My Clubs</string>
+    <string name="btn_add_club">Add Club</string>
+    <string name="btn_add_stroke">Record Stroke</string>
+    <string name="lbl_club_name">Club Name</string>
+    <string name="lbl_date_created">Date Created</string>
+    <string name="lbl_active">Active</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_delete">Delete</string>
+
+    <string-array name="direction_spinner_data">
+        <item>Hook</item>
+        <item>Draw</item>
+        <item>Pull</item>
+        <item>Pure</item>
+        <item>Push</item>
+        <item>Fade</item>
+        <item>Slice</item>
+
+    </string-array>
+
 </resources>

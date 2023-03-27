@@ -46,6 +46,13 @@ public class Stroke {
         this.distance = distance;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
 
     //constructor
     public Stroke(long id, Date date, Club club, int distance, String direction) {
@@ -65,5 +72,11 @@ public class Stroke {
         String dateStr = date != null ? date.toString() : "NULL";
         return String.format("ID: %d Date: %s Club: %s Distance: %s Direction: %s",
                 id, dateStr, club.getName(), distance, direction.name());
+    }
+
+    public boolean isValid(){
+        //TODO: finish validation
+
+        return true;
     }
 }

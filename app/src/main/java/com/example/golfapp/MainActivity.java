@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
 
     Button btnStrokeList;
+    Button btnClubList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, StrokeListActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnClubList = findViewById(R.id.btnClubList);
+        btnClubList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, ClubListActivity.class);
                 startActivity(i);
             }
         });
