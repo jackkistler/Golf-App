@@ -9,6 +9,9 @@
     <string name="lbl_active">Active</string>
     <string name="btn_save">Save</string>
     <string name="btn_delete">Delete</string>
+    <string name="lbl_club">Club</string>
+    <string name="lbl_direction">Direction</string>
+    <string name="lbl_distance">Distance</string>
 
     <string-array name="direction_spinner_data">
         <item>Hook</item>

@@ -50,13 +50,36 @@ public class Stroke {
         return direction;
     }
 
+    public String getDirectionString(){
+        return direction.toString();
+    }
+
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    public void setDirection(String direction){
+        for(Direction d : Direction.values()){
+            if(d.name().equals(direction)){
+                this.direction = d;
+            }
+        }
     }
 
     //constructor
     public Stroke(long id, Date date, Club club, int distance, String direction) {
         this.id = id;
+        this.date = date;
+        this.club = club;
+        this.distance = distance;
+        for(Direction d : Direction.values()){
+            if(d.name().equals(direction)){
+                this.direction = d;
+            }
+        }
+    }
+
+    public Stroke(Date date, Club club, int distance, String direction) {
         this.date = date;
         this.club = club;
         this.distance = distance;

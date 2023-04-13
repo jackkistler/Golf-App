@@ -4,71 +4,114 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StrokeDetailsActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".StrokeDetailsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/layout_bg"
+        android:backgroundTint="@color/light_green"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/lblClub"
-            android:layout_width="wrap_content"
+            android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Club" />
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/lbl_club"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/clubSpinner"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="#F1EDED"
+            android:layout_marginRight="10dp"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/layout_bg"
+        android:backgroundTint="@color/dark_green"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/lblDirection"
-            android:layout_width="wrap_content"
+            android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Direction" />
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/lbl_direction"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/directionSpinner"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
+            android:entries="@array/direction_spinner_data"
             android:textAlignment="center"
-            android:entries="@array/direction_spinner_data"/>
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="#F1EDED"
+            android:layout_marginRight="10dp"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/layout_bg"
+        android:backgroundTint="@color/light_green"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/lblDistance"
-            android:layout_width="wrap_content"
+            android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Distance" />
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/lbl_distance"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtDistance"
-            android:layout_width="wrap_content"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:layout_weight="3"
+            android:background="#F1EDED"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="" />
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -76,13 +119,18 @@
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_save" />
+        android:background="@drawable/layout_bg"
+        android:text="@string/btn_save"
+        android:layout_margin="20dp"/>
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/layout_bg"
         android:text="@string/btn_delete"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>

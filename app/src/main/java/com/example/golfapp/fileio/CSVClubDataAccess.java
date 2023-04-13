@@ -17,10 +17,12 @@ public class CSVClubDataAccess {
 
     private ArrayList<Club> allClubs;
     private Context context;
+    CSVStrokeDataAccess strokeDa;
 
     public CSVClubDataAccess(Context c){
         this.context = c;
         this.allClubs = new ArrayList();
+//        strokeDa = new CSVStrokeDataAccess(c);
 
         loadClubs();
     }
@@ -72,7 +74,12 @@ public class CSVClubDataAccess {
     public int deleteClub(Club c){
         Club clubToRemove = getClubById(c.getId());
         if(clubToRemove != null){
+
             allClubs.remove(allClubs.indexOf(clubToRemove));
+
+
+
+
             saveClubs();
             return 1;
         }else{

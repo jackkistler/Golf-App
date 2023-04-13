@@ -1,5 +1,6 @@
 package com.example.golfapp;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,7 +15,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.golfapp.fileio.CSVClubDataAccess;
+import com.example.golfapp.fileio.CSVStrokeDataAccess;
 import com.example.golfapp.models.Club;
+import com.example.golfapp.models.Stroke;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ public class ClubListActivity extends AppCompatActivity {
     private CSVClubDataAccess da;
     private ArrayList<Club> allClubs;
     Button btnAddClub;
+    CSVStrokeDataAccess strokeDa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class ClubListActivity extends AppCompatActivity {
 //            add(new Club(2, "Shitty Wedge", new Date(123,8,22)));
 //            }
 //        };
-
+        strokeDa = new CSVStrokeDataAccess(this);
         btnAddClub = findViewById(R.id.btnAddClub);
         btnAddClub.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,10 +70,20 @@ public class ClubListActivity extends AppCompatActivity {
                 View listItemView = super.getView(position, convertView, parentListView);
                 TextView lblClubName = listItemView.findViewById(R.id.lblClubName);
                 CheckBox chkActive = listItemView.findViewById(R.id.chkActive);
+                TextView txtNumStrokes = listItemView.findViewById(R.id.txtNumStrokes);
 
                 Club currentClub = allClubs.get(position);
                 lblClubName.setText(currentClub.getName());
                 chkActive.setChecked(currentClub.isActive());
+
+                int numStrokes = 0;
+                for(Stroke s : strokeDa.getAllStrokes()){
+                    if(s.getClub().getId() == currentClub.getId()){
+                        numStrokes++;
+                    }
+                }
+
+                txtNumStrokes.setText("Number of Strokes: " + numStrokes);
 
                 chkActive.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -79,7 +93,7 @@ public class ClubListActivity extends AppCompatActivity {
                         try {
                             da.updateClub(currentClub);
                         } catch (Exception e) {
-                            Log.d(TAG, "oh dang. ");
+                            Log.d(TAG, "could not change active");
                         }
                     }
                 });
@@ -99,8 +113,12 @@ public class ClubListActivity extends AppCompatActivity {
         };
         lsClubs.setAdapter(adapter);
 
-
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher_round);
 
 
     }

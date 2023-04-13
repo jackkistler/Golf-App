@@ -7,6 +7,8 @@ import com.example.golfapp.ClubListActivity;
 import com.example.golfapp.models.Club;
 import com.example.golfapp.models.Stroke;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,7 +29,8 @@ public class CSVStrokeDataAccess {
         this.allStrokes = new ArrayList();
         clubDa = new CSVClubDataAccess(c);
 
-        convertCSVToStroke("1,4/4/2023,1,100,Hook");
+
+        //convertCSVToStroke("1,4/4/2023,1,100,Hook");
 
         loadStrokes();
     }
@@ -49,19 +52,46 @@ public class CSVStrokeDataAccess {
     }
 
     public Stroke insertStroke(Stroke s) throws Exception{
-//        if(s.isValid()){
-//            long newId = getMaxId() + 1;
-//            s.setId(newId);
-//            allStrokes.add(s);
-//        }else{
-//            throw new Exception("Invalid Stroke");
-//        }
+        if(s.isValid()){
+            long newId = getMaxId() + 1;
+            s.setId(newId);
+            allStrokes.add(s);
+            saveStrokes();
+        }else{
+            throw new Exception("Invalid Stroke");
+        }
 
         return s;
     }
 
-//    public Stroke updateStroke //will i need to use this?
-    //    public int deleteStroke //will i need to use this?
+    public Stroke updateStroke(Stroke s) throws Exception {
+        if(s.isValid()){
+            Stroke strokeToUpdate = getStrokeById(s.getId());
+            //set everything for the stroke
+            strokeToUpdate.setClub(s.getClub());
+            strokeToUpdate.setDate(s.getDate());
+            strokeToUpdate.setDirection(s.getDirection());
+            strokeToUpdate.setDistance(s.getDistance());
+
+            saveStrokes();
+        }else{
+            throw new Exception("Bummer! That is an Invalid stroke");
+        }
+
+        return s;
+    }
+
+
+    public int deleteStroke(Stroke s) {
+        Stroke strokeToRemove = getStrokeById(s.getId());
+        if(strokeToRemove != null){
+            allStrokes.remove(allStrokes.indexOf(strokeToRemove));
+            saveStrokes();
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 
     private String convertStrokeToCSV(Stroke s){
         SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
@@ -70,7 +100,7 @@ public class CSVStrokeDataAccess {
                 + s.getClub().getId() + ","
                 + s.getDistance() + ","
                 + s.getDirection();
-//        Log.d(TAG, retVal);
+
         return retVal;
 
     }
@@ -80,8 +110,18 @@ public class CSVStrokeDataAccess {
         long id = Long.parseLong(data[0]);
 
         Date date = new Date(data[1]);
+        ArrayList<String> allClubIds = new ArrayList();
+        for(Club c : clubDa.getAllClubs()){
+            allClubIds.add(c.getId()+"");
+        }
 
-        Club club = clubDa.getClubById(Long.parseLong(data[2]));
+        Club club;
+        if(allClubIds.contains(data[2])){
+            club = clubDa.getClubById(Long.parseLong(data[2]));
+        }else{
+            club = new Club(999, "Unknown", new Date(), false);
+        }
+
         int distance = Integer.parseInt(data[3]);
         String direction = data[4];
 
@@ -96,10 +136,10 @@ public class CSVStrokeDataAccess {
         if(dataString == null || dataString.isEmpty()){
             Log.d(TAG, "NO DATA FILE");
             //TEST STROKES
-            dataList.add(new Stroke(1, new Date(), new Club(1, "testclub", new Date()), 100, "Hook"));
-            dataList.add(new Stroke(2, new Date(), new Club(1, "testclub", new Date()), 125, "Hook"));
-            dataList.add(new Stroke(3, new Date(), new Club(2, "betterclub", new Date()), 100, "Pure"));
-            this.allStrokes = dataList;
+//            dataList.add(new Stroke(1, new Date(), new Club(1, "testclub", new Date()), 100, "Hook"));
+//            dataList.add(new Stroke(2, new Date(), new Club(1, "testclub", new Date()), 125, "Hook"));
+//            dataList.add(new Stroke(3, new Date(), new Club(2, "betterclub", new Date()), 100, "Pure"));
+//            this.allStrokes = dataList;
             //END TEST STROKES
             return;
         }
@@ -141,6 +181,16 @@ public class CSVStrokeDataAccess {
             maxId = sId > maxId ? sId : maxId;
         }
         return maxId;
+    }
+
+    public void removeClub(long id){
+        loadStrokes();
+        for(Stroke s : getAllStrokes()){
+            if(s.getId() == id){
+                s.setClub(new Club(999, "Unknown", new Date(), false));
+            }
+        }
+        saveStrokes();
     }
 
 }
