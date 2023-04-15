@@ -11,5 +11,6 @@
     <color name="dark_green">#2A7A2E</color>
     <color name="light_green">#35be2c</color>
     <color name="silver">#C0C0C0</color>
+    <color name="alternate_green">#A84CAF50</color>
 <!--    <color name="dark_green">#45955a</color>-->
 </resources>

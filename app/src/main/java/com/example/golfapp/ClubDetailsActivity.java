@@ -110,7 +110,7 @@ public class ClubDetailsActivity extends AppCompatActivity {
 
         if(id > 0){
             club = da.getClubById(id);
-            Log.d(TAG, club.toString());
+//            Log.d(TAG, club.toString());
 
             putDataIntoUI();
             btnDelete.setVisibility(View.VISIBLE);
@@ -142,10 +142,14 @@ public class ClubDetailsActivity extends AppCompatActivity {
 //                }else{
 //                    recolor = true;
 //                }
-
+                Log.d(TAG, position+"");
                 if(position % 2==0){
                     listItemView.setBackgroundColor(getResources().getColor(R.color.light_green));
+                }else{
+                    listItemView.setBackgroundColor(getResources().getColor(R.color.alternate_green));
+
                 }
+
 
                 Stroke currentStroke = clubStrokes.get(position);
                 lblStrokeId.setText("" + currentStroke.getId());

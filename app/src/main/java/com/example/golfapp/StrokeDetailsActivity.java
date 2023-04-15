@@ -145,7 +145,7 @@ public class StrokeDetailsActivity extends AppCompatActivity {
             txtDistance.setError("Please enter a distance");
         }else if(distance > 500){
             isValid = false;
-            txtDistance.setError("Bullshit, you did not");
+            txtDistance.setError("Liar, you did not");
         }
 
         return isValid;

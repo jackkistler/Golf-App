@@ -81,7 +81,10 @@ public class StrokeListActivity extends AppCompatActivity {
                 lblClub.setText(currentStroke.getClub().getName());
 
                 if(position % 2==0){
+                    Log.d(TAG, position + " : " + (position % 2));
                     listItemView.setBackgroundColor(getResources().getColor(R.color.light_green));
+                }else{
+                    listItemView.setBackgroundColor(getResources().getColor(R.color.alternate_green));
                 }
 
 
