@@ -34,6 +34,7 @@ public class StrokeListActivity extends AppCompatActivity {
     private ArrayList<Stroke> allStrokes;
 
     Button btnAddStroke;
+    Button btnStrokeSummary;
     SimpleDateFormat sdf = new SimpleDateFormat("MM/d/yy");
 
 
@@ -56,6 +57,17 @@ public class StrokeListActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        btnStrokeSummary = findViewById(R.id.btnStrokeSummary);
+        btnStrokeSummary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(StrokeListActivity.this, StrokeSummaryActivity.class);
+                startActivity(i);
+            }
+        });
+
+
 
         lsStrokes = findViewById(R.id.lsStrokes);
         allStrokes = da.getAllStrokes();
@@ -81,7 +93,7 @@ public class StrokeListActivity extends AppCompatActivity {
                 lblClub.setText(currentStroke.getClub().getName());
 
                 if(position % 2==0){
-                    Log.d(TAG, position + " : " + (position % 2));
+//                    Log.d(TAG, position + " : " + (position % 2));
                     listItemView.setBackgroundColor(getResources().getColor(R.color.light_green));
                 }else{
                     listItemView.setBackgroundColor(getResources().getColor(R.color.alternate_green));
@@ -116,7 +128,7 @@ public class StrokeListActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher_round);
+        actionBar.setHomeAsUpIndicator(R.mipmap.ball_icon);
 
 
 

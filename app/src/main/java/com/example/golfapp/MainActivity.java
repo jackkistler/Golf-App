@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.golfapp.fileio.CSVClubDataAccess;
 import com.example.golfapp.models.Club;
 import com.example.golfapp.models.Stroke;
 
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnStrokeList;
     Button btnClubList;
+    CSVClubDataAccess clubDa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +36,19 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d(TAG, c.toString());
 //        Log.d(TAG, s.toString());
 
+        clubDa = new CSVClubDataAccess(this);
+
         btnStrokeList = findViewById(R.id.btnStrokeList);
         btnStrokeList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, StrokeListActivity.class);
-                startActivity(i);
+                if(clubDa.getAllClubs().isEmpty()){
+                    Toast.makeText(MainActivity.this, "Please register a club", Toast.LENGTH_LONG).show();
+                }else{
+                    Intent i = new Intent(MainActivity.this, StrokeListActivity.class);
+                    startActivity(i);
+                }
+
             }
         });
 
@@ -56,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher_round);
+        actionBar.setHomeAsUpIndicator(R.mipmap.ball_icon);
 
 
     }

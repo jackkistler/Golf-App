@@ -12,6 +12,17 @@
     <string name="lbl_club">Club</string>
     <string name="lbl_direction">Direction</string>
     <string name="lbl_distance">Distance</string>
+    <string name="hook">Hook</string>
+    <string name="draw">Draw</string>
+    <string name="pull">Pull</string>
+    <string name="pure">Pure</string>
+    <string name="push">Push</string>
+    <string name="fade">Fade</string>
+    <string name="slice">Slice</string>
+    <string name="lbl_num_strokes">Total Strokes</string>
+    <string name="stroke_summary">Stroke Summary</string>
+    <string name="unused_direction">N/A</string>
+
 
     <string-array name="direction_spinner_data">
         <item>Hook</item>

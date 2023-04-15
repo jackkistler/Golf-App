@@ -4,14 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StrokeListActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".StrokeListActivity">
 
-        <Button
+    <Button
         android:id="@+id/btnAddStroke"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_add_stroke" />
+
+    <Button
+        android:id="@+id/btnStrokeSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
     <ListView
         android:id="@+id/lsStrokes"
@@ -19,7 +25,7 @@
         android:layout_height="match_parent"
         android:fadeScrollbars="false"
         android:scrollbarSize="10dip"
-        android:scrollbarThumbVertical="@color/silver"/>
+        android:scrollbarThumbVertical="@color/silver" />
 
 
 </LinearLayout>

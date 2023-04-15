@@ -3,7 +3,7 @@ package com.example.golfapp.models;
 import java.util.Date;
 
 enum Direction {
-    Hook, Draw, Pull, Pure, Push, Fade, Slice;
+    Hook, Pull, Draw, Pure, Fade, Push, Slice;
 }
 
 public class Stroke {
