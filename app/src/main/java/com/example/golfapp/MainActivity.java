@@ -1,8 +1,10 @@
 package com.example.golfapp;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnStrokeList;
     Button btnClubList;
+    Button btnAbout;
     CSVClubDataAccess clubDa;
 
     @Override
@@ -65,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnAbout = findViewById(R.id.btnAbout);
+        btnAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showInfoDialog();
+            }
+        });
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -72,8 +83,20 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.mipmap.ball_icon);
+    }
 
+    public void showInfoDialog(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(getString(R.string.btn_about));
+        alert.setMessage(getString(R.string.about_msg));
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
 
+        alert.show();
     }
 
 

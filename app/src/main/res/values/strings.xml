@@ -21,10 +21,16 @@
     <string name="push">Push</string>
     <string name="fade">Fade</string>
     <string name="slice">Slice</string>
-    <string name="lbl_num_strokes">Total Strokes</string>
+    <string name="lbl_num_strokes">Total Strokes: </string>
     <string name="stroke_summary">Stroke Summary</string>
     <string name="unused_direction">N/A</string>
     <string name="btn_club_summary">Summary</string>
+    <string name="btn_about">About</string>
+    <string name="about_msg">"This app was created as my final project in Mobile Applications Development - Spring 2023
+
+I hope you are getting good use out of it!
+
+    - Jackson Kistler"</string>
 
 
     <string-array name="direction_spinner_data">

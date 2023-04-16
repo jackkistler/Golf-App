@@ -85,6 +85,9 @@ public class ClubDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //todo go to summary page with clubid
+                Intent i = new Intent(ClubDetailsActivity.this, StrokeSummaryActivity.class);
+                i.putExtra(StrokeDetailsActivity.EXTRA_CLUB_ID, club.getId());
+                startActivity(i);
             }
         });
 
@@ -181,15 +184,15 @@ public class ClubDetailsActivity extends AppCompatActivity {
                 lblClub.setText(currentStroke.getClub().getName());
 
                 //add onclick listeners if needed
-//                listItemView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        //Log.d(TAG, "Display Details for " + currentTask.getId());
-//                        Intent i = new Intent(StrokeListActivity.this, StrokeDetailsActivity.class);
-//                        i.putExtra(StrokeDetailsActivity.EXTRA_STROKE_ID, currentStroke.getId());
-//                        startActivity(i);
-//                    }
-//                });
+                listItemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Log.d(TAG, "Display Details for " + currentTask.getId());
+                        Intent i = new Intent(ClubDetailsActivity.this, StrokeDetailsActivity.class);
+                        i.putExtra(StrokeDetailsActivity.EXTRA_STROKE_ID, currentStroke.getId());
+                        startActivity(i);
+                    }
+                });
 
                 return listItemView;
             }

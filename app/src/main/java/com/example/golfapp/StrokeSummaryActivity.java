@@ -32,6 +32,7 @@ public class StrokeSummaryActivity extends AppCompatActivity {
     TextView txtCountFade;
     TextView txtCountPush;
     TextView txtCountSlice;
+    TextView lblSummaryHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +43,37 @@ public class StrokeSummaryActivity extends AppCompatActivity {
         clubDa = new CSVClubDataAccess(this);
         allStrokes = strokeDa.getAllStrokes();
         lblStrokeCount = findViewById(R.id.lblCountStrokes);
-        totalStrokes = allStrokes.size();
+
         txtCountHook = findViewById(R.id.txtCountHook);
         txtCountPull = findViewById(R.id.txtCountPull);
         txtCountDraw = findViewById(R.id.txtCountDraw);
         txtCountPure = findViewById(R.id.txtCountPure);
         txtCountFade = findViewById(R.id.txtCountFade);
         txtCountPush = findViewById(R.id.txtCountPush);
-        txtCountSlice =findViewById(R.id.txtCountSlice);
+        txtCountSlice = findViewById(R.id.txtCountSlice);
+        lblSummaryHeader = findViewById(R.id.lblSummaryHeader);
+
+        Intent i = getIntent();
+        long clubId = i.getLongExtra(EXTRA_CLUB_ID, -1);
+
+        if(clubId > 0){
+            //todo fill activity with club related data
+            ArrayList<Stroke> clubStrokes = new ArrayList();
+            for(Stroke s : allStrokes){
+                if(s.getClub().getId() == clubId){
+                    clubStrokes.add(s);
+                }
+            }
+            allStrokes = clubStrokes;
+
+            lblSummaryHeader.setText(clubDa.getClubById(clubId).getName());
+
+        }
+
+        totalStrokes = allStrokes.size();
 
 
-        lblStrokeCount.setText(totalStrokes + "");
+        lblStrokeCount.setText(getString(R.string.lbl_num_strokes) + " " + totalStrokes);
 
         txtCountHook.setText(String.format("%d - %d%%", strokeCountByDirection("Hook"), (strokeCountByDirection("Hook")*100)/totalStrokes));
         txtCountPull.setText(String.format("%d - %d%%", strokeCountByDirection("Pull"), (strokeCountByDirection("Pull")*100)/totalStrokes));
@@ -65,18 +86,6 @@ public class StrokeSummaryActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-        Intent i = getIntent();
-        long clubId = i.getLongExtra(EXTRA_CLUB_ID, -1);
-
-        if(clubId > 0){
-            //todo fill activity with club related data
-        }
-
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
@@ -84,17 +93,6 @@ public class StrokeSummaryActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.mipmap.ball_icon);
 
-    }
-
-    public ArrayList<Stroke> getStrokesByClub(long id){
-        ArrayList<Stroke> returnArray = new ArrayList();
-
-        for(Stroke s : allStrokes){
-            //todo: populate return array
-        }
-
-
-        return returnArray;
     }
 
     public int strokeCountByDirection(String direction){
