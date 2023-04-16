@@ -13,5 +13,6 @@
     <color name="silver">#C0C0C0</color>
     <color name="alternate_green">#A84CAF50</color>
     <color name="bg_green">#2f9c2d</color>
+    <color name="red">#FF0000</color>
 <!--    <color name="dark_green">#45955a</color>-->
 </resources>

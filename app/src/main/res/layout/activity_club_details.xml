@@ -11,12 +11,14 @@
         android:id="@+id/lblClubName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:text="@string/lbl_club_name" />
 
     <EditText
         android:id="@+id/txtClubName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -24,12 +26,14 @@
         android:id="@+id/lblDateCreated"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:text="@string/lbl_date_created" />
 
     <EditText
         android:id="@+id/txtDateCreated"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:editable="false"
         android:ems="10"
         android:inputType="none" />
@@ -45,7 +49,10 @@
             android:id="@+id/chkActive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lbl_active" />
+            android:buttonTint="@color/dark_green"
+            android:text="@string/lbl_active"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="0dp"
@@ -62,38 +69,57 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/layout_bg"
             android:text="@string/btn_add_stroke"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnSave"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/layout_bg"
-        android:text="@string/btn_save"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/layout_bg"
-        android:text="@string/btn_delete"
-        android:visibility="gone"
-        android:layout_margin="10dp"/>
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/layout_bg"
+            android:text="@string/btn_save" />
+
+        <Button
+            android:id="@+id/btnClubSummary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/layout_bg"
+            android:text="@string/btn_club_summary"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/layout_bg"
+            android:text="@string/btn_delete"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lsClubStrokes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbarFadeDuration="0"
-        android:visibility="gone"
         android:fadeScrollbars="false"
+        android:scrollbarFadeDuration="0"
         android:scrollbarSize="10dip"
-        android:scrollbarThumbVertical="@color/silver"/>
+        android:scrollbarThumbVertical="@color/silver"
+        android:visibility="gone" />
 
 
 </LinearLayout>

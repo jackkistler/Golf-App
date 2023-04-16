@@ -7,16 +7,54 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnStrokeList"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/stroke_data" />
+        android:layout_height="0dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1.5"
+        app:srcCompat="@drawable/homepageplain" />
 
-    <Button
-        android:id="@+id/btnClubList"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/my_clubs" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnStrokeList"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/home_buttons"
+            android:text="@string/stroke_data_multi"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:backgroundTint="@null" />
+
+
+        <Button
+            android:id="@+id/btnClubList"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/home_buttons"
+            android:text="@string/my_clubs_multi"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:backgroundTint="@null" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

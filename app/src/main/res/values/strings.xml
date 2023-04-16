@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">Golf App</string>
+    <string name="app_name">Golfr</string>
     <string name="stroke_data">Stroke Data</string>
     <string name="my_clubs">My Clubs</string>
+    <string name="stroke_data_multi">Stroke&#10;Data</string>
+    <string name="my_clubs_multi"> My&#10;Clubs</string>
     <string name="btn_add_club">Add Club</string>
     <string name="btn_add_stroke">Record Stroke</string>
     <string name="lbl_club_name">Club Name</string>
@@ -22,6 +24,7 @@
     <string name="lbl_num_strokes">Total Strokes</string>
     <string name="stroke_summary">Stroke Summary</string>
     <string name="unused_direction">N/A</string>
+    <string name="btn_club_summary">Summary</string>
 
 
     <string-array name="direction_spinner_data">

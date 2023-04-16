@@ -3,10 +3,12 @@ package com.example.golfapp;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.CompoundButtonCompat;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +50,7 @@ public class ClubDetailsActivity extends AppCompatActivity {
     Button btnRecordStroke;
     SimpleDateFormat sdf = new SimpleDateFormat("MM/d/yyyy");
     ListView lsClubStrokes;
+    Button btnClubSummary;
 
 
 
@@ -65,6 +68,25 @@ public class ClubDetailsActivity extends AppCompatActivity {
         lsClubStrokes = findViewById(R.id.lsClubStrokes);
         clubStrokes = new ArrayList();
         btnRecordStroke = findViewById(R.id.btnRecordStroke);
+        btnClubSummary = findViewById(R.id.btnClubSummary);
+
+        chkActive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(chkActive.isChecked()){
+                    CompoundButtonCompat.setButtonTintList(chkActive, ColorStateList.valueOf(getResources().getColor(R.color.dark_green)));
+                }else{
+                    CompoundButtonCompat.setButtonTintList(chkActive, ColorStateList.valueOf(getResources().getColor(R.color.red)));
+                }
+            }
+        });
+
+        btnClubSummary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //todo go to summary page with clubid
+            }
+        });
 
 
         txtDateCreated.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +138,7 @@ public class ClubDetailsActivity extends AppCompatActivity {
             btnDelete.setVisibility(View.VISIBLE);
             lsClubStrokes.setVisibility(View.VISIBLE);
             btnRecordStroke.setVisibility(View.VISIBLE);
+            btnClubSummary.setVisibility(View.VISIBLE);
 
             for(Stroke s : strokeDa.getAllStrokes()){
                 if(s.getClub().getId() == club.getId()){
@@ -188,6 +211,10 @@ public class ClubDetailsActivity extends AppCompatActivity {
             txtClubName.setText(club.getName());
             txtDateCreated.setText(sdf.format(club.getDate()));
             chkActive.setChecked(club.isActive());
+            if(!chkActive.isChecked()){
+                CompoundButtonCompat.setButtonTintList(chkActive, ColorStateList.valueOf(getResources().getColor(R.color.red)));
+
+            }
         }
     }
 

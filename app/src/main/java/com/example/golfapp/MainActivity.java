@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(clubDa.getAllClubs().isEmpty()){
                     Toast.makeText(MainActivity.this, "Please register a club", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(MainActivity.this, ClubDetailsActivity.class);
+                    startActivity(i);
                 }else{
                     Intent i = new Intent(MainActivity.this, StrokeListActivity.class);
                     startActivity(i);
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
 
         btnClubList = findViewById(R.id.btnClubList);
         btnClubList.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
