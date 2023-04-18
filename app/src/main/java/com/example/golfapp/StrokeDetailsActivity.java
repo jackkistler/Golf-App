@@ -75,7 +75,7 @@ public class StrokeDetailsActivity extends AppCompatActivity {
                     Intent i = new Intent(StrokeDetailsActivity.this, StrokeListActivity.class);
                     startActivity(i);
                 }else{
-                    Toast.makeText(StrokeDetailsActivity.this, "Unable to save stroke", Toast.LENGTH_LONG).show();
+                    Toast.makeText(StrokeDetailsActivity.this, getString(R.string.unable_to_save_stroke), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -142,10 +142,10 @@ public class StrokeDetailsActivity extends AppCompatActivity {
 
         if(txtDistance.getText().toString().isEmpty()){
             isValid = false;
-            txtDistance.setError("Please enter a distance");
+            txtDistance.setError(getString(R.string.error_distance_empty));
         }else if(distance > 500){
             isValid = false;
-            txtDistance.setError("Liar, you did not");
+            txtDistance.setError(getString(R.string.error_invalid_distance));
         }
 
         return isValid;
@@ -155,14 +155,14 @@ public class StrokeDetailsActivity extends AppCompatActivity {
         if(validate()){
             getDataFromUI();
             if(stroke.getId() > 0){
-                Log.d(TAG, "Update");
+//                Log.d(TAG, "Update");
                 try {
                     da.updateStroke(stroke);
                 } catch (Exception e) {
                     Log.d(TAG, e.getMessage());
                 }
             }else{
-                Log.d(TAG, "Insert");
+//                Log.d(TAG, "Insert");
                 try {
                     da.insertStroke(stroke);
                 } catch (Exception e) {
@@ -178,7 +178,7 @@ public class StrokeDetailsActivity extends AppCompatActivity {
         Club club = clubDa.getAllClubs().get(0);
         for(Club c : clubDa.getAllClubs()){
             if(c.getName().equals(clubSpinner.getSelectedItem().toString())){
-                Log.d(TAG, "got in");
+
                 club = c;
             }
             Log.d(TAG, clubSpinner.getSelectedItem().toString() + " " + c.getName());
@@ -200,9 +200,9 @@ public class StrokeDetailsActivity extends AppCompatActivity {
 
     private void showDeleteDialog(){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("WHAT ARE YOU DOING!?");
-        alert.setMessage("Are you sure you want ot delete this record?");
-        alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alert.setTitle(getString(R.string.delete_stroke));
+        alert.setMessage(getString(R.string.delete_stroke_text));
+        alert.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //actual deletion
@@ -211,7 +211,7 @@ public class StrokeDetailsActivity extends AppCompatActivity {
                 //
             }
         });
-        alert.setNegativeButton("NO!", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -219,6 +219,8 @@ public class StrokeDetailsActivity extends AppCompatActivity {
         });
         alert.show();
     }
+
+
 
 
 

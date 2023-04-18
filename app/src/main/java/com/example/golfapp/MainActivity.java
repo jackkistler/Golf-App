@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.golfapp.fileio.CSVClubDataAccess;
+import com.example.golfapp.fileio.CSVStrokeDataAccess;
 import com.example.golfapp.models.Club;
 import com.example.golfapp.models.Stroke;
 
@@ -25,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
     Button btnStrokeList;
     Button btnClubList;
     Button btnAbout;
+    Button btnReset;
     CSVClubDataAccess clubDa;
+    CSVStrokeDataAccess strokeDa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d(TAG, s.toString());
 
         clubDa = new CSVClubDataAccess(this);
+        strokeDa = new CSVStrokeDataAccess(this);
 
         btnStrokeList = findViewById(R.id.btnStrokeList);
         btnStrokeList.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnReset = findViewById(R.id.btnReset);
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showResetDialog();
+            }
+        });
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -89,13 +101,36 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(getString(R.string.btn_about));
         alert.setMessage(getString(R.string.about_msg));
-        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
         });
 
+        alert.show();
+    }
+
+    public void showResetDialog(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(getString(R.string.total_reset));
+        alert.setMessage(getString(R.string.total_reset_text));
+
+        alert.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //actual deletion
+                strokeDa.resetStrokes();
+                clubDa.resetClubs();
+                //
+            }
+        });
+        alert.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
         alert.show();
     }
 

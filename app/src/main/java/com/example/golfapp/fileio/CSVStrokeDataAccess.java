@@ -193,4 +193,23 @@ public class CSVStrokeDataAccess {
         saveStrokes();
     }
 
+    public int deleteStrokesForClub(long id){
+        loadStrokes();
+        int count = 0;
+        for(Stroke s: getAllStrokes()){
+            if(s.getClub().getId() == id){
+                deleteStroke(s);
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public void resetStrokes(){
+        for(Stroke s : allStrokes){
+            deleteStroke(s);
+        }
+    }
+
 }

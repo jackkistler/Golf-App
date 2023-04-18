@@ -33,6 +33,7 @@ public class StrokeSummaryActivity extends AppCompatActivity {
     TextView txtCountPush;
     TextView txtCountSlice;
     TextView lblSummaryHeader;
+    TextView lblAvgDistance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class StrokeSummaryActivity extends AppCompatActivity {
         txtCountPush = findViewById(R.id.txtCountPush);
         txtCountSlice = findViewById(R.id.txtCountSlice);
         lblSummaryHeader = findViewById(R.id.lblSummaryHeader);
+        lblAvgDistance = findViewById(R.id.lblAverageDistance);
 
         Intent i = getIntent();
         long clubId = i.getLongExtra(EXTRA_CLUB_ID, -1);
@@ -71,9 +73,14 @@ public class StrokeSummaryActivity extends AppCompatActivity {
         }
 
         totalStrokes = allStrokes.size();
+        int totalDistance = 0;
+        for(Stroke s : allStrokes){
+            totalDistance += s.getDistance();
+        }
+        int averageDistance = totalDistance / totalStrokes;
 
-
-        lblStrokeCount.setText(getString(R.string.lbl_num_strokes) + " " + totalStrokes);
+        lblStrokeCount.setText(getString(R.string.lbl_num_strokes) + "\n" + totalStrokes);
+        lblAvgDistance.setText(getString(R.string.lbl_average_distance) + "\n" + averageDistance + " yards");
 
         txtCountHook.setText(String.format("%d - %d%%", strokeCountByDirection("Hook"), (strokeCountByDirection("Hook")*100)/totalStrokes));
         txtCountPull.setText(String.format("%d - %d%%", strokeCountByDirection("Pull"), (strokeCountByDirection("Pull")*100)/totalStrokes));

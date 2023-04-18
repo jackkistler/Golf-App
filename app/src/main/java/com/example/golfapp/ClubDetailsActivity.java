@@ -75,8 +75,11 @@ public class ClubDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(chkActive.isChecked()){
                     CompoundButtonCompat.setButtonTintList(chkActive, ColorStateList.valueOf(getResources().getColor(R.color.dark_green)));
+                    btnRecordStroke.setBackground(getDrawable(R.drawable.layout_bg));
+                    btnRecordStroke.setVisibility(View.VISIBLE);
                 }else{
                     CompoundButtonCompat.setButtonTintList(chkActive, ColorStateList.valueOf(getResources().getColor(R.color.red)));
+                    btnRecordStroke.setBackground(getDrawable(R.drawable.locked_button));
                 }
             }
         });
@@ -84,7 +87,6 @@ public class ClubDetailsActivity extends AppCompatActivity {
         btnClubSummary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo go to summary page with clubid
                 Intent i = new Intent(ClubDetailsActivity.this, StrokeSummaryActivity.class);
                 i.putExtra(StrokeDetailsActivity.EXTRA_CLUB_ID, club.getId());
                 startActivity(i);
@@ -106,7 +108,7 @@ public class ClubDetailsActivity extends AppCompatActivity {
                     Intent i = new Intent(ClubDetailsActivity.this, ClubListActivity.class);
                     startActivity(i);
                 }else{
-                    Toast.makeText(ClubDetailsActivity.this, "Unable to save club", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClubDetailsActivity.this, R.string.unable_to_save_club, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -122,10 +124,15 @@ public class ClubDetailsActivity extends AppCompatActivity {
         btnRecordStroke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //navigate to stroke details, pushing id of club
-                Intent i = new Intent(ClubDetailsActivity.this, StrokeDetailsActivity.class);
-                i.putExtra(StrokeDetailsActivity.EXTRA_CLUB_ID, club.getId());
-                startActivity(i);
+                if(chkActive.isChecked()){
+                    Intent i = new Intent(ClubDetailsActivity.this, StrokeDetailsActivity.class);
+                    i.putExtra(StrokeDetailsActivity.EXTRA_CLUB_ID, club.getId());
+
+                    startActivity(i);
+                }else{
+                    Toast.makeText(ClubDetailsActivity.this, getString(R.string.invalid_button), Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -135,18 +142,23 @@ public class ClubDetailsActivity extends AppCompatActivity {
 
         if(id > 0){
             club = da.getClubById(id);
-//            Log.d(TAG, club.toString());
 
             putDataIntoUI();
             btnDelete.setVisibility(View.VISIBLE);
-            lsClubStrokes.setVisibility(View.VISIBLE);
-            btnRecordStroke.setVisibility(View.VISIBLE);
-            btnClubSummary.setVisibility(View.VISIBLE);
+
+            if(chkActive.isChecked()){
+                btnRecordStroke.setVisibility(View.VISIBLE);
+            }
 
             for(Stroke s : strokeDa.getAllStrokes()){
                 if(s.getClub().getId() == club.getId()){
                     clubStrokes.add(s);
                 }
+            }
+
+            if(!clubStrokes.isEmpty()){
+                lsClubStrokes.setVisibility(View.VISIBLE);
+                btnClubSummary.setVisibility(View.VISIBLE);
             }
         }
 
@@ -162,12 +174,7 @@ public class ClubDetailsActivity extends AppCompatActivity {
                 TextView lblDate = listItemView.findViewById(R.id.lblDate);
                 TextView lblClub = listItemView.findViewById(R.id.lblClub);
                 TextView lblDistance = listItemView.findViewById(R.id.lblDistance);
-//                if(recolor){
-//                    listItemView.setBackgroundColor(getResources().getColor(R.color.dark_green));
-//                    recolor = false;
-//                }else{
-//                    recolor = true;
-//                }
+//
                 Log.d(TAG, position+"");
                 if(position % 2==0){
                     listItemView.setBackgroundColor(getResources().getColor(R.color.light_green));
@@ -183,7 +190,6 @@ public class ClubDetailsActivity extends AppCompatActivity {
                 lblDistance.setText(currentStroke.getDistance() + "");
                 lblClub.setText(currentStroke.getClub().getName());
 
-                //add onclick listeners if needed
                 listItemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -216,7 +222,6 @@ public class ClubDetailsActivity extends AppCompatActivity {
             chkActive.setChecked(club.isActive());
             if(!chkActive.isChecked()){
                 CompoundButtonCompat.setButtonTintList(chkActive, ColorStateList.valueOf(getResources().getColor(R.color.red)));
-
             }
         }
     }
@@ -226,10 +231,10 @@ public class ClubDetailsActivity extends AppCompatActivity {
 
         if(txtClubName.getText().toString().isEmpty()){
             isValid = false;
-            txtClubName.setError("You must enter a club name");
+            txtClubName.setError(getString(R.string.error_club_name_empty));
         }else if(txtClubName.getText().length() > 20){
             isValid = false;
-            txtClubName.setError("Club name too long");
+            txtClubName.setError(getString(R.string.error_club_name_long));
         }
 
 
@@ -240,7 +245,7 @@ public class ClubDetailsActivity extends AppCompatActivity {
 
         if(dateStr.isEmpty()){
             isValid = false;
-            txtDateCreated.setError("Please enter a Date");
+            txtDateCreated.setError(getString(R.string.error_date_empty));
         }else{
             try {
                 dateCreated = sdf.parse(dateStr);
@@ -249,14 +254,9 @@ public class ClubDetailsActivity extends AppCompatActivity {
             }
             if(dateCreated.after(new Date())){
                 isValid = false;
-                txtDateCreated.setError("Date cannot be in the future");
+                txtDateCreated.setError(getString(R.string.error_date_future));
             }
         }
-
-
-
-
-
 
         return isValid;
     }
@@ -265,14 +265,14 @@ public class ClubDetailsActivity extends AppCompatActivity {
         if(validate()){
             getDataFromUI();
             if(club.getId() > 0){
-                Log.d(TAG, "Update");
+//                Log.d(TAG, "Update");
                 try {
                     da.updateClub(club);
                 } catch (Exception e) {
                     Log.d(TAG, e.getMessage());
                 }
             }else{
-                Log.d(TAG, "Insert");
+//                Log.d(TAG, "Insert");
                 try {
                     da.insertClub(club);
                 } catch (Exception e) {
@@ -308,9 +308,9 @@ public class ClubDetailsActivity extends AppCompatActivity {
 
     private void showDeleteDialog(){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("WHAT ARE YOU DOING!?");
-        alert.setMessage("Are you sure you want ot delete this club?");
-        alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alert.setTitle(getString(R.string.delete_club));
+        alert.setMessage(getString(R.string.delete_club_text));
+        alert.setPositiveButton(getString(R.string.delete_club_only), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //actual deletion
@@ -320,7 +320,16 @@ public class ClubDetailsActivity extends AppCompatActivity {
                 //
             }
         });
-        alert.setNegativeButton("NO!", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(getString(R.string.delete_club_and_strokes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //delete all strokes for club
+                strokeDa.deleteStrokesForClub(club.getId());
+                da.deleteClub(club);
+                startActivity( new Intent(ClubDetailsActivity.this, ClubListActivity.class));
+            }
+        });
+        alert.setNeutralButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -346,6 +355,7 @@ public class ClubDetailsActivity extends AppCompatActivity {
         }, year, month, day);
 
         dp.getDatePicker().setMaxDate(System.currentTimeMillis());
+
 
         dp.show();
     }

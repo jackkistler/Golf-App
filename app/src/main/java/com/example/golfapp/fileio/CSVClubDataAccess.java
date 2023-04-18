@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.golfapp.models.Club;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -161,6 +162,12 @@ public class CSVClubDataAccess {
             maxId = cId > maxId ? cId : maxId;
         }
         return maxId;
+    }
+
+    public void resetClubs(){
+        for(Club c : allClubs){
+            deleteClub(c);
+        }
     }
 
 
